@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include <stdbool.h> // Bat buoc phai co de dung bool, true, false
+
+#define M 3
+#define N 3
+
+// Khai bao nguyen mau ham truoc khi su dung trong main
+void displayBoard(char board[][N]);
+bool checkWinner(char board[][N], char player);
+
+int main() {
+    // Khoi tao ban co
+    char board[M][N];
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j++) {
+            board[i][j] = ' ';
+        }
+    }
+
+    char player1 = 'X';
+    char player2 = 'O';
+    char currentPlayer = player1; // Bat dau voi nguoi choi 1
+    int moves = 0; // Bien dem so nuoc di de kiem tra hoa
+
+    // Vong lap toi da 9 nuoc di (3x3 = 9)
+    while (moves < M * N) {
+        displayBoard(board);
+
+        int row, col;
+        int playerNum = (currentPlayer == player1) ? 1 : 2;
+        
+        printf("Nhap vi tri dat quan cua nguoi choi %d [%c] (hang, cot tu 0 den 2): ", playerNum, currentPlayer);
+        scanf("%d %d", &row, &col);
+
+        // Kiem tra tinh hop le cua toa do nhap vao
+        if (row < 0 || row >= M || col < 0 || col >= N) {
+            printf("=> Toa do khong hop le! Vui long nhap lai.\n\n");
+            continue; // Yeu cau nhap lai
+        }
+
+        // Kiem tra xem o da co nguoi danh chua
+        if (board[row][col] != ' ') {
+            printf("=> O nay da co nguoi danh! Vui long chon o khac.\n\n");
+            continue; // Yeu cau nhap lai
+        }
+
+        // Dat quan co va tang so nuoc di
+        board[row][col] = currentPlayer;
+        moves++;
+
+        // Kiem tra xem nguoi choi hien tai co thang khong
+        if (checkWinner(board, currentPlayer)) {
+            displayBoard(board);
+            printf("Chuc mung! Nguoi choi %d [%c] thang!\n", playerNum, currentPlayer);
+            return 0; // Ket thuc game
+        }
+
+        // Doi luot choi
+        currentPlayer = (currentPlayer == player1) ? player2 : player1;
+    }
+
+    // Neu thoat khoi vong lap ma khong ai thang (da danh het 9 o)
+    displayBoard(board);
+    printf("Tran dau Hoa!\n");
+
+    return 0;
+}
+
+// Ham hien thi ban co (da duoc lam cho dep mat hon mot chut)
+void displayBoard(char board[][N]) {
+    printf("\n  BAN CO:\n");
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j++) {
+            printf(" [%c] ", board[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+// Ham kiem tra xem nguoi choi co thang cuoc khong
+bool checkWinner(char board[][N], char player) {
+    // Kiem tra hang
+    for (int i = 0; i < M; i++) {
+        if (board[i][0] == player && board[i][1] == player && board[i][2] == player) {
+            return true;
+        }
+    }
+    
+    // Kiem tra cot
+    for (int j = 0; j < N; j++) {
+        if (board[0][j] == player && board[1][j] == player && board[2][j] == player) {
+            return true;
+        }
+    }
+    
+    // Kiem tra duong cheo chinh (\)
+    if (board[0][0] == player && board[1][1] == player && board[2][2] == player) {
+        return true;
+    }
+    
+    // Kiem tra duong cheo phu (/)
+    if (board[0][2] == player && board[1][1] == player && board[2][0] == player) {
+        return true;
+    }
+
+    return false;
+}
