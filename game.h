@@ -35,6 +35,10 @@ typedef struct {
     int draws;
 } ScoreBoard;
 
+// Thêm vào sau struct
+extern Stone board[BOARD_SIZE][BOARD_SIZE];
+extern ScoreBoard gameScore;
+
 // --- KHAI BAO NGUYEN MAU HAM (API) ---
 
 // Console
