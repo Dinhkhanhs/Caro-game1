@@ -39,7 +39,7 @@ typedef struct {
 
 // Console
 void setupWindowsConsole();
-int showSplashScreen(); // Da doi thanh int de tra ve kich thuoc
+int showSplashScreen(); 
 
 // Ban co (Da them tham so int size)
 void initBoard(Stone board[BOARD_SIZE][BOARD_SIZE], int size);
