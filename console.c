@@ -64,3 +64,52 @@ int showSplashScreen() {
         }
     }
 }
+// thêm hàm hiển thị thanh trạng thái ( ý tưởng mới cho giao diện đỡ trống trải)
+// Ham di chuyen con tro (gotoXY) va doi mau (setTextColor) giu nguyen nhu cu
+void gotoXY(int x, int y) {
+    COORD coord;
+    coord.X = x;
+    coord.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void setTextColor(int color) {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
+
+// Nang cap: Them tham so toa do X, Y va thoi gian
+void drawStatusBar(int cursorX, int cursorY, int timeRemaining) {
+    int consoleWidth = 80;  // Chieu ngang console
+    int consoleHeight = 35; // Dong duoi cung
+
+    // Luu lai vi tri con tro hien tai (de sau khi ve xong status bar, tra con tro ve cho cu)
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    int oldX = csbi.dwCursorPosition.X;
+    int oldY = csbi.dwCursorPosition.Y;
+
+    // Di chuyen xuong dong cuoi cung de ve
+    gotoXY(0, consoleHeight);
+    setTextColor(240); // Mau nen noi bat (Vi du: Nen trang, chu den)
+
+    // Tao mang ky tu de chua chuoi da ghep thong so
+    char statusText[100];
+    
+    // Ghep thong tin dong vao chuoi
+    // %02d giup in so luon co 2 chu so (VD: 05, 12) cho dep mat
+    sprintf(statusText, " GVHD: Th.s Tran Thi Dung | Nhom nhung con bo | Toa do: (%02d, %02d) | Thoi gian: %02ds ", 
+            cursorX, cursorY, timeRemaining);
+
+    // In chuoi ra man hinh
+    printf("%s", statusText);
+
+    // Xoa/phu mau nen cho phan khoang trong con lai ben phai
+    for (int i = strlen(statusText); i < consoleWidth; i++) {
+        printf(" ");
+    }
+
+    // Reset mau va tra con tro ve vi tri cu tren ban co
+    setTextColor(7); 
+    gotoXY(oldX, oldY);
+    fflush(stdout); // lenh ep console hien thi ngay lap tuc ham vua in
+}
