@@ -37,6 +37,8 @@ typedef struct {
     int   phien_ban;            // phiên bản format (hiện tại = 1)
     time_t thoi_gian_luu;       // thời điểm bấm lưu
 
+    int kich_thuoc_thuc_te;
+
     // Người chơi
     NguoiChoi nguoi_choi_1;
     NguoiChoi nguoi_choi_2;
