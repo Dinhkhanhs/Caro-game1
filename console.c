@@ -1,4 +1,4 @@
-#include "../include/game.h"
+#include "game.h"
 #include <windows.h> 
 #include <stdio.h>
 #include <string.h>
