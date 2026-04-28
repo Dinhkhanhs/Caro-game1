@@ -1,4 +1,4 @@
-#include "../include/game.h"
+#include "game.h"
 
 void initStack(Stack *s) { s->top = -1; }
 bool isEmpty(Stack *s) { return s->top == -1; }
