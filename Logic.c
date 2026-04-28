@@ -1,4 +1,4 @@
-#include "../include/game.h"
+#include "game.h"
 
 bool checkWinner(Stone board[BOARD_SIZE][BOARD_SIZE], int size, int row, int col, Stone player) {
     int directions[4][2] = {{0,1}, {1,0}, {1,1}, {1,-1}};
