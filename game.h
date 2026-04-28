@@ -42,6 +42,11 @@ typedef struct {
 #define ANSI_YELLOW  "\x1B[93m"
 #define ANSI_GRAY    "\x1B[90m"
 
+// --- KY TU VE HOP ---
+#define H_LINE "\xE2\x94\x80"
+#define V_LINE "\xE2\x94\x82"
+#define CROSS  "\xE2\x94\xBC"
+
 // --- KHAI BAO HAM ---
 void setupWindowsConsole();
 int showSplashScreen();
