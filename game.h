@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <stdbool.h>
+#include <cau_truc_du_lieu.h>
 
 // --- CAU HINH GAME MAC DINH ---
 #define BOARD_SIZE 15
@@ -21,8 +22,6 @@
 #define CROSS  "\xE2\x94\xBC"
 
 // --- CAU TRUC DU LIEU ---
-typedef enum { NA = 0, BLACK = 1, WHITE = 2 } Stone;
-
 typedef struct {
     int row;
     int col;
@@ -46,12 +45,12 @@ void setupWindowsConsole();
 int showSplashScreen(); 
 
 // Ban co (Da them tham so int size)
-void initBoard(Stone board[BOARD_SIZE][BOARD_SIZE], int size);
-void displayBoard(Stone board[BOARD_SIZE][BOARD_SIZE], int size, int cursorRow, int cursorCol);
+void initBoard(char board[BOARD_SIZE][BOARD_SIZE], int size);
+void displayBoard(char board[BOARD_SIZE][BOARD_SIZE], int size, int cursorRow, int cursorCol);
 
 // Logic (Da them tham so int size)
-int countDirection(Stone board[BOARD_SIZE][BOARD_SIZE], int size, int r, int c, int dr, int dc, Stone player);
-bool checkWinner(Stone board[BOARD_SIZE][BOARD_SIZE], int size, int lastRow, int lastCol, Stone player);
+int countDirection(char board[BOARD_SIZE][BOARD_SIZE], int size, int r, int c, int dr, int dc, Stone player);
+bool checkWinner(char board[BOARD_SIZE][BOARD_SIZE], int size, int lastRow, int lastCol, Stone player);
 
 // Diem so
 void loadScore(ScoreBoard *sb);
